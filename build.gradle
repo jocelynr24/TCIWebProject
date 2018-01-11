@@ -4,9 +4,13 @@ version '1.0-SNAPSHOT'
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+        classpath "com.gradle:build-scan-plugin:1.11"
     }
 }
 
@@ -15,6 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'jacoco'
+apply plugin: "com.gradle.build-scan"
 
 jar {
     baseName = 'gs-rest-service'
