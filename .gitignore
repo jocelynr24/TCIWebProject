@@ -5,6 +5,5 @@
 /out
 /build
 /.gradle
-/gradle
 *.bat
 gradlew
