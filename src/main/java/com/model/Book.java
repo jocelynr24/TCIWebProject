@@ -5,11 +5,11 @@ public class Book {
     String genre;
     String format;
     int year;
-    String authors;
+    String[] authors;
     String publisher;
     int isbn;
 
-    public Book(String name, String genre, String format, int year, String authors, String publisher, int isbn) {
+    public Book(String name, String genre, String format, int year, String[] authors, String publisher, int isbn) {
         this.name = name;
         this.genre = genre;
         this.format = format;
@@ -33,9 +33,9 @@ public class Book {
 
     public int getYear() { return year; }
 
-    public String getAuthors() { return authors; }
+    public String[] getAuthors() { return authors; }
 
-    public void setAuthors(String authors) { this.authors = authors; }
+    public void setAuthors(String[] authors) { this.authors = authors; }
 
     public String getPublisher() { return publisher; }
 
