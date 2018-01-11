@@ -1,0 +1,10 @@
+
+*.xml
+/idea
+*.iml
+/out
+/build
+/.gradle
+/gradle
+*.bat
+gradlew
