@@ -9,3 +9,11 @@
 *.bin
 *.lock
 /lib
+.gradle/4.4/fileHashes/fileHashes.bin
+.gradle/4.4/fileHashes/fileHashes.lock
+.gradle/workspace-id.txt.lock
+.gradle/4.4/fileChanges/last-build.bin
+.gradle/4.4/fileHashes/fileHashes.bin
+.gradle/4.4/fileHashes/fileHashes.lock
+.gradle/workspace-id.txt.lock
+.idea/.name
