@@ -1,13 +1,16 @@
 group 'TCIWebFinal'
 version '1.0-SNAPSHOT'
 
-
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+        classpath "com.gradle:build-scan-plugin:1.11"
     }
 }
 
@@ -15,6 +18,8 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
+apply plugin: "com.gradle.build-scan"
 
 jar {
     baseName = 'gs-rest-service'
@@ -32,12 +37,32 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile group: 'junit', name: 'junit', version: '4.12'
-//    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1'
-//    compile group: 'javax.inject', name: 'javax.inject', version: '1'
-//    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.0'
     testCompile group: 'org.mockito', name: 'mockito-all', version: '2.0.2-beta'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
-    compile group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
-    compile group: 'com.owlike', name: 'genson', version: '1.3'
+}
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
+
+buildScan {
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = 'yes'
+}
+
+test {
+    useJUnit()
+}
+
+jacoco {
+    toolVersion = "0.7.9"
 }
