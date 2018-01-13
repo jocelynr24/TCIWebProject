@@ -23,32 +23,35 @@ public class CrawlerRestSpringController {
 
     /**
      *
+	 * @param URL (link to crawl the website)
      * @param item (Title of a music/book/movie)
      * @Method Get
      * @return String/json result (movie/book/music)
      */
-    @RequestMapping(value="/search_specific_item/{item}", method = RequestMethod.GET, produces = "application/json")
-    public String searchSpecificItem(@PathVariable String item)  {
-        return  crawler.generalCrawler(item.toLowerCase());
+    @RequestMapping(value="/search_specific_item/{URL, item}", method = RequestMethod.GET, produces = "application/json")
+    public String searchSpecificItem(@PathVariable String URL, @PathVariable String item)  {
+        return  crawler.getSpecificItem(URL.toLowerCase(), item);
     }
 
     /**
+	 * @param URL (link to crawl the website)
      * @Method Get
      * @return String/json result (search's information)
      */
-    @RequestMapping(value="/information", method = RequestMethod.GET, produces = "application/json")
-    public String information(){
-        return crawler.information();
-
+    @RequestMapping(value="/information/{URL}", method = RequestMethod.GET, produces = "application/json")
+    public String information(@PathVariable String URL){
+        return crawler.generalCrawler(URL.toLowerCase());
+	
     }
 
     /**
+	 * @param URL (link to crawl the website)
      * @Method Get
-     * @return String/json result (search's information)
+     * @return String/json result containing data of the first movie, the first book and the first music met
      */
-    @RequestMapping(value="/item_by_category", method = RequestMethod.GET, produces = "application/json")
-    public String itemByCategory(){
-        return crawler.findFirstMovieBookMusic();
+    @RequestMapping(value="/item_by_category/{URL}", method = RequestMethod.GET, produces = "application/json")
+    public String itemByCategory(@PathVariable String URL){
+        return crawler.getOnePerItem(URL.toLowerCase);
     }
 
 }
