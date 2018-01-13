@@ -107,9 +107,73 @@ public class Crawler {
         return true;
     }
 
+    /**
+     * This function makes use of the webCrawler to get the first Movie, Book and Music it meets on the website and store the information inside a JSON formatted String
+     * @param URL The URL we want to get other links (e.g.: "http://website.com/page?id=123").
+     * @return A JSON formatted String that contains the information of the first Movie, Book and music met on the wesite, starting from the given URL.
+     */
     public String getOnePerItem(String URL) {
+        // We start the timer to get the duration of the time spent while executing the method and getting the result
+        long startTime = System.nanoTime();
+        // Integer for the index incrementer in the do-while statement
+        Integer index = 0;
+        // String that will be the result of the scraper, it will be transformed to a JSONObject to retrieve the data.
+        String json;
+        // Initializing the onePerItem object that has to match with the final result returned.
+        OnePerItem onePerItem = new OnePerItem();
+        // String that will contain the result of the crawling that should get information from the first book, music and movie met.
+        String returned = "";
+        // TODO
+        Integer ID;
+        // Regex to detect if a URL is in a good format
+        String regex = "(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?";
 
-        return "";
+        // If the URL is in a good format
+        if (URL.matches(regex)) {
+            // TODO
+            webCrawler(URL);
+            // TODO
+            do{
+                // Storing into the json String the result of the scraper for each link included in the links list.
+                json = scraper.scrap(links.get(index));
+                //
+                if(json != null){
+                    // TODO
+                    jsonObject = new JSONObject(json);
+                }
+                // TODO
+                if(jsonObject.has("Category")){
+                    // TODO
+                    ID = Integer.valueOf(links.get(index).split("=")[1]);
+                    // TODO
+                    if(jsonObject.getString("Category").equals("Books") && (onePerItem.getBook() == null)){
+                        // TODO
+                        onePerItem.setBook(crawlerSerializer.serializeToBook(jsonObject, ID));
+                    } else if(jsonObject.getString("Category").equals("Movies") && (onePerItem.getMovie() == null)){
+                        // TODO
+                        onePerItem.setMovie(crawlerSerializer.serializeToMovie(jsonObject, ID));
+                    } else if(jsonObject.getString("Category").equals("Music") && (onePerItem.getMusic() == null)){
+                        // TODO
+                        onePerItem.setMusic(crawlerSerializer.serializeToMusic(jsonObject, ID));
+                    }
+                }
+                // Increasing the index to go through the links list that contains the links of the website that is being crawled.
+                index++;
+            }while((links.size() > index) || ((onePerItem.getBook() == null) && (onePerItem.getMovie() == null) && (onePerItem.getMusic() == null)));
+            // We get the duration of the time at the end of the execution of the method
+            long endTime = System.nanoTime();
+            // We make the difference between start and end time to get the duration of the time spent on the method
+            long duration = endTime - startTime;
+            // We set the Time in the onePerItem object as the duration calculated
+            onePerItem.setTime(duration);
+            // We use Genson to serialize the object as a String and store it into returned String.
+            returned = genson.serialize(onePerItem);
+        } else {
+            // Else, if it is not in a good format, we throw an exception
+            throw new IllegalArgumentException("illegal format of Url [" + URL + "]");
+        }
+        // We return the string in JSON format if it has succeeded, else an empty string if it has failed.
+        return returned;
     }
 
     /**

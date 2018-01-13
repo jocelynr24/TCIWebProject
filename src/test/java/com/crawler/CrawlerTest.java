@@ -106,4 +106,43 @@ public class CrawlerTest {
         // Assert (that the result is an empty string)
         Assert.assertEquals("", specificItem);
     }
+	
+	/**
+     * The getOnePerItemShouldThrowExceptionForWrongUrl() method should throw an exception if we give a wrong URL format.
+     * We are testing here if we get this exception.
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void getOnePerItemShouldThrowExceptionForWrongUrl() {
+        // Act (Giving a wrong URL to the basicWebCrawler, it should throw an exception)
+        basicWebCrawler.getOnePerItem("Wrong URL");
+    }
+
+    /**
+     * The getOnePerItemShouldReturnAString() method should always return a string result, whether it is empty or filled with information.
+     * We are testing here if this statement is true.
+     */
+    @Test
+    public void getOnePerItemShouldReturnAString(){
+        // Act (we give a URL and a name to find something)
+        String onePerItem = basicWebCrawler.getOnePerItem("https://i398507.hera.fhict.nl/tci/");
+        // Assert (that the previously returned item is a string)
+        Assert.assertThat(onePerItem, instanceOf(String.class));
+    }
+
+    /**
+     * The getOnePerItemShouldReturnValueForSpecificUrl() method tests the fact that getOnePerItem() method should return the same result for the same parameter.
+     */
+    @Test
+    public void getOnePerItemShouldReturnValueForSpecificUrl() {
+        // onePerItem contains the result of calling the getOnePerItem method, with the URL of the index
+        String onePerItem = basicWebCrawler.getOnePerItem("https://i398507.hera.fhict.nl/tci/");
+        // We remove from it the time elapsed which will neve the the same
+        onePerItem = onePerItem.replaceAll(",\"time\":\\d{1,20}", "");
+        // We store the expected result, but we remove the time which will never be the same, as well as above.
+        String expectedResult = "{\"book\":{\"authors\":[\"Robert C. Martin\"],\"format\":\"Ebook\",\"genre\":\"Tech\",\"id\":102,\"isbn\":\"978-0132350884\",\"publisher\":\"Prentice Hall\",\"title\":\"Clean Code: A Handbook of Agile Software Craftsmanship\",\"year\":2008},\"movie\":{\"director\":\"Robert Zemeckis\",\"format\":\"DVD\",\"genre\":\"Drama\",\"id\":201,\"name\":\"Forrest Gump\",\"stars\":[\"Tom Hanks\",\" Rebecca Williams\",\" Sally Field\",\" Michael Conner Humphreys\"],\"writers\":[\"Winston Groom\",\" Eric Roth\"],\"year\":1994},\"music\":{\"artist\":\"Ludwig van Beethoven\",\"format\":\"CD\",\"genre\":\"Clasical\",\"id\":301,\"name\":\"Beethoven: Complete Symphonies\",\"year\":2012}";
+        expectedResult = expectedResult.replaceAll(",\"time\":\\d{1,20}", "");
+
+        // Assert (that the expected JSON is the same than the returned JSON)
+        Assert.assertEquals(expectedResult, onePerItem);
+    }
 }
