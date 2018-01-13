@@ -94,7 +94,7 @@ public class Crawler {
      * @return A JSON formatted String that contains the information of the first Movie, Book and music met on the website, starting from the given URL.
      */
     public String getAllItems(String URL) {
-        long startTime = System.nanoTime();
+        long startTime, endTime, duration;
         String json;
         AllItems allItems = new AllItems();
         String returned = "";
@@ -102,8 +102,12 @@ public class Crawler {
         String regex = "(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?";
 
         if (URL.matches(regex)) {
+
+            startTime = System.nanoTime();
+
             webCrawler(URL);
-            for(Integer index = 0; links.size() <= index; index++){
+
+            for(Integer index = 0; links.size() > index; index++){
                 json = scraper.scrap(links.get(index));
                 if(json != null){
                     jsonObject = new JSONObject(json);
@@ -119,9 +123,11 @@ public class Crawler {
 					}
                 }
             }
-            long endTime = System.nanoTime();
-            long duration = endTime - startTime;
+
+            endTime = System.nanoTime();
+            duration = endTime - startTime;
             allItems.setTime(duration);
+            
             returned = genson.serialize(allItems);
         } else {
             throw new IllegalArgumentException("illegal format of Url [" + URL + "]");
