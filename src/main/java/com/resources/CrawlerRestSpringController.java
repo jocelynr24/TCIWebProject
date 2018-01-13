@@ -28,7 +28,7 @@ public class CrawlerRestSpringController {
      * @return String/json result (movie/book/music)
      */
     @RequestMapping(value="/search_specific_item/{item}", method = RequestMethod.GET, produces = "application/json")
-    public String searchSpecificItem(@PathVariable("value=item") String item)  {
+    public String searchSpecificItem(@PathVariable String item)  {
         return  crawler.generalCrawler(item.toLowerCase());
     }
 
