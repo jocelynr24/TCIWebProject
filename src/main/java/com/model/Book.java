@@ -4,7 +4,7 @@ package com.model;
  * Model class of the book objects we can find on the website.
  */
 
-public class BookModel {
+public class Book {
     private int id;
     private String title;
     private String genre;
@@ -14,7 +14,7 @@ public class BookModel {
     private String publisher;
     private String isbn;
 
-    public BookModel(int id, String title, String genre, String format, int year, String[] authors, String publisher, String isbn) {
+    public Book(int id, String title, String genre, String format, int year, String[] authors, String publisher, String isbn) {
         this.id = id;
         this.title = title;
         this.genre = genre;
