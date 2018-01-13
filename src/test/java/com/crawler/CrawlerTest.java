@@ -53,6 +53,6 @@ public class CrawlerTest {
     @Test (expected = IllegalArgumentException.class)
     public void webCrawlerShouldThrowExceptionForWrongUrl() {
         // Act (Giving a wrong URL to the basicWebCrawler, it should throw an exception)
-        basicWebCrawler.webCrawler("Worng URL");
+        crawler.webCrawler("Worng URL");
     }
 }
