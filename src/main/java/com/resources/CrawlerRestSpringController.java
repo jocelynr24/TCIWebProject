@@ -30,7 +30,7 @@ public class CrawlerRestSpringController {
      * @Method Get
      * @return String/json result (movie/book/music)
      */
-    @RequestMapping(value="/search_specific_item/{URL, item}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="/searchspecificitem/{URL}/{item}", method = RequestMethod.GET, produces = "application/json")
     public String searchSpecificItem(@PathVariable String URL, @PathVariable String item)  {
         return  crawler.getSpecificItem(URL.toLowerCase(), item);
     }
@@ -51,7 +51,7 @@ public class CrawlerRestSpringController {
      * @Method Get
      * @return String/json result containing data of the first movie, the first book and the first music met
      */
-    @RequestMapping(value="/item_by_category/{URL}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="/itembycategory/{URL}", method = RequestMethod.GET, produces = "application/json")
     public String itemByCategory(@PathVariable String URL){
 
         return crawler.getAllItems(URL.toLowerCase());
