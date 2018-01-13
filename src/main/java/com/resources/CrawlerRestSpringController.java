@@ -33,16 +33,16 @@ public class CrawlerRestSpringController {
         return  crawler.getSpecificItem(URL.toLowerCase(), item);
     }
 
-    /**
-	 * @param URL (link to crawl the website)
-     * @Method Get
-     * @return String/json result (search's information)
-     */
-    @RequestMapping(value="/information/{URL}", method = RequestMethod.GET, produces = "application/json")
-    public String information(@PathVariable String URL){
-        return crawler.generalCrawler(URL.toLowerCase());
-	
-    }
+//    /**
+//	 * @param URL (link to crawl the website)
+//     * @Method Get
+//     * @return String/json result (search's information)
+//     */
+//    @RequestMapping(value="/information/{URL}", method = RequestMethod.GET, produces = "application/json")
+//    public String information(@PathVariable String URL){
+//        return crawler.generalCrawler(URL.toLowerCase());
+//
+//    }
 
     /**
 	 * @param URL (link to crawl the website)
@@ -51,7 +51,7 @@ public class CrawlerRestSpringController {
      */
     @RequestMapping(value="/item_by_category/{URL}", method = RequestMethod.GET, produces = "application/json")
     public String itemByCategory(@PathVariable String URL){
-        return crawler.getOnePerItem(URL.toLowerCase);
+        return crawler.getOnePerItem(URL.toLowerCase());
     }
 
 }
