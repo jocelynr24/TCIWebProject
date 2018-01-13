@@ -1,8 +1,12 @@
 
 *.xml
-/idea
+/.idea
 *.iml
 /out
 /build
 
 
+*.bin
+*.lock
+/lib
+/.idea/.name
