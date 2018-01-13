@@ -1,3 +1,5 @@
+package com.model;
+
 public class OnePerItem {
     private long time;
     private Object movie;
