@@ -130,35 +130,36 @@ public class Crawler {
 
         // If the URL is in a good format
         if (URL.matches(regex)) {
-            // TODO
+            // Executing the webCrawler with the given URL
             webCrawler(URL);
-            // TODO
+            // Then, when the links are stored, we will call the scraper
             do{
                 // Storing into the json String the result of the scraper for each link included in the links list.
                 json = scraper.scrap(links.get(index));
                 //
                 if(json != null){
-                    // TODO
+                    // We assume that if the returned string is empty, we will not do the next checks
                     jsonObject = new JSONObject(json);
+					// If the built JSON contains the "Category" key, we will retrieve the data to get the wanted results.
+					if(jsonObject.has("Category")){
+						// We get the id that is written in the URL store at the actual index of the links list.
+						ID = Integer.valueOf(links.get(index).split("=")[1]);
+						// We write the condition to detect whether it is a book, a music or a movie, so it retrieve differently the data.
+						if(jsonObject.getString("Category").equals("Books") && (onePerItem.getBook() == null)){
+							// If the detected category is a book, it insert the information into the onePerItem object's book.
+							onePerItem.setBook(crawlerSerializer.serializeToBook(jsonObject, ID));
+						} else if(jsonObject.getString("Category").equals("Movies") && (onePerItem.getMovie() == null)){
+							// If the detected category is a movie, it insert the information into the onePerItem object's movie.
+							onePerItem.setMovie(crawlerSerializer.serializeToMovie(jsonObject, ID));
+						} else if(jsonObject.getString("Category").equals("Music") && (onePerItem.getMusic() == null)){
+							// If the detected category is a music, it insert the information into the onePerItem object's music.
+							onePerItem.setMusic(crawlerSerializer.serializeToMusic(jsonObject, ID));
+						}
+					}
                 }
-                // TODO
-                if(jsonObject.has("Category")){
-                    // TODO
-                    ID = Integer.valueOf(links.get(index).split("=")[1]);
-                    // TODO
-                    if(jsonObject.getString("Category").equals("Books") && (onePerItem.getBook() == null)){
-                        // TODO
-                        onePerItem.setBook(crawlerSerializer.serializeToBook(jsonObject, ID));
-                    } else if(jsonObject.getString("Category").equals("Movies") && (onePerItem.getMovie() == null)){
-                        // TODO
-                        onePerItem.setMovie(crawlerSerializer.serializeToMovie(jsonObject, ID));
-                    } else if(jsonObject.getString("Category").equals("Music") && (onePerItem.getMusic() == null)){
-                        // TODO
-                        onePerItem.setMusic(crawlerSerializer.serializeToMusic(jsonObject, ID));
-                    }
-                }
-                // Increasing the index to go through the links list that contains the links of the website that is being crawled.
-                index++;
+				// Increasing the index to go through the links list that contains the links of the website that is being crawled.
+				index++;
+			// This method is done while we have some links in the list or if the onePerItem object doesn't contain one book, one music and one movie.
             }while((links.size() > index) || ((onePerItem.getBook() == null) && (onePerItem.getMovie() == null) && (onePerItem.getMusic() == null)));
             // We get the duration of the time at the end of the execution of the method
             long endTime = System.nanoTime();
