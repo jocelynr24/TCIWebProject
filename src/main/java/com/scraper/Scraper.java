@@ -13,14 +13,21 @@ import java.util.HashMap;
 import com.owlike.genson.Genson;
 
 
+/**
+ * Scraper is called by the Crawler. The Crawler give severals URLs to the Scraper, which
+ * is responsible to get information from the page and return a JSON to the Crawler.
+ * This class contains only one method scrap(String url)
+ * @author J-B Leblanc
+ */
+
 public class Scraper {
 
     public Scraper(){};
 
 
     /**
-     * The method scrap() is inspecting the html page, searching for td and th balises, and stocks
-     * the result in an HashMap, and then serialize this HashMap to returns the JSON containing
+     * The method scrap() is inspecting the html page, searching for td and th tags, and stocks
+     * the result in an HashMap. Then it serializes this HashMap to returns the JSON containing
      * all the information about Movie, Books or Musics that the page contains.
      * @param url
      * @return a string which contains the json

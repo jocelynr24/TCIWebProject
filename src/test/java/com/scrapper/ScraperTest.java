@@ -2,8 +2,10 @@ package com.scrapper;
 
 import com.scraper.Scraper;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
+ * Class containing all the tests made on the Scraper class
  * Created by J-B Leblanc on 11/01/2018.
  */
 public class ScraperTest {
@@ -29,15 +31,19 @@ public class ScraperTest {
         scraper.scrap("lol.com");
     }
 
-
     /**
-     * ScrapVerifyTheTypeOfReturn : tests the type of return of the method scraper
+     * ScrapReturnBook : Testing what return a well known page containing book information
      */
     @Test
-    public void ScrapVerifyTheTypeOfReturn(){
+    public void ScrapReturnBook(){
         Scraper scraper = new Scraper();
-        scraper.scrap("http://www.lol.com");
+        String s = scraper.scrap("https://i398507.hera.fhict.nl/tci/details.php?id=102");
+
+        String example = "{\"Category\":\"Books\",\"Format\":\"Ebook\",\"Year\":\"2008\",\"ISBN\":\"978-0132350884\",\"Authors\":\"Robert C. Martin\",\"Genre\":\"Tech\",\"Publisher\":\"Prentice Hall\",\"title\":\"Clean Code: A Handbook of Agile Software Craftsmanship\"}";
+
+        assertEquals(example,s);
 
     }
+
 
 }
