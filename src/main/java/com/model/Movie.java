@@ -1,26 +1,36 @@
 package com.model;
 
-import java.util.Arrays;
-import java.util.Objects;
+/**
+ * Model class of the movie objects we can find on the website.
+ */
 
 public class Movie {
+    private int id;
+    private String name;
+    private String genre;
+    private String format;
+    private int year;
+    private String director;
+    private String [] writers;
+    private String [] stars;
 
-    String name;
-    String genre;
-    String format;
-    int year;
-    String director;
-    String [] writer;
-    String [] stars;
-
-    public Movie(String name, String genre, String format, int year, String director, String[] writer, String[] stars) {
+    public Movie(int id, String name, String genre, String format, int year, String director, String[] writers, String[] stars) {
+        this.id = id;
         this.name = name;
         this.genre = genre;
         this.format = format;
         this.year = year;
         this.director = director;
-        this.writer = writer;
+        this.writers = writers;
         this.stars = stars;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -63,12 +73,12 @@ public class Movie {
         this.director = director;
     }
 
-    public String[] getWriter() {
-        return writer;
+    public String[] getWriters() {
+        return writers;
     }
 
-    public void setWriter(String[] writer) {
-        this.writer = writer;
+    public void setWriters(String[] writers) {
+        this.writers = writers;
     }
 
     public String[] getStars() {
@@ -77,24 +87,5 @@ public class Movie {
 
     public void setStars(String[] stars) {
         this.stars = stars;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
-        return year == movie.year &&
-                Objects.equals(name, movie.name) &&
-                Objects.equals(genre, movie.genre) &&
-                Objects.equals(format, movie.format) &&
-                Objects.equals(director, movie.director) &&
-                Arrays.equals(writer, movie.writer) &&
-                Arrays.equals(stars, movie.stars);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, genre, format, year, director, writer, stars);
     }
 }

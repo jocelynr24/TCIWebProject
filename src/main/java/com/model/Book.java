@@ -1,16 +1,22 @@
 package com.model;
 
-public class Book {
-    String name;
-    String genre;
-    String format;
-    int year;
-    String[] authors;
-    String publisher;
-    int isbn;
+/**
+ * Model class of the book objects we can find on the website.
+ */
 
-    public Book(String name, String genre, String format, int year, String[] authors, String publisher, int isbn) {
-        this.name = name;
+public class Book {
+    private int id;
+    private String title;
+    private String genre;
+    private String format;
+    private int year;
+    private String[] authors;
+    private String publisher;
+    private String isbn;
+
+    public Book(int id, String title, String genre, String format, int year, String[] authors, String publisher, String isbn) {
+        this.id = id;
+        this.title = title;
         this.genre = genre;
         this.format = format;
         this.year = year;
@@ -19,48 +25,67 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getName() { return name; }
+    public int getId() {
+        return id;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getGenre() { return genre; }
+    public String getTitle() {
+        return title;
+    }
 
-    public void setGenre(String genre) { this.genre = genre; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public String getFormat() { return format; }
+    public String getGenre() {
+        return genre;
+    }
 
-    public void setFormat(String format) { this.format = format; }
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
-    public int getYear() { return year; }
+    public String getFormat() {
+        return format;
+    }
 
-    public String[] getAuthors() { return authors; }
+    public void setFormat(String format) {
+        this.format = format;
+    }
 
-    public void setAuthors(String[] authors) { this.authors = authors; }
+    public int getYear() {
+        return year;
+    }
 
-    public String getPublisher() { return publisher; }
+    public void setYear(int year) {
+        this.year = year;
+    }
 
-    public void setPublisher(String publisher) { this.publisher = publisher; }
+    public String[] getAuthors() {
+        return authors;
+    }
 
-    public int getIsbn() { return isbn; }
+    public void setAuthors(String[] authors) {
+        this.authors = authors;
+    }
 
-    public void setIsbn(int isbn) { this.isbn = isbn; }
+    public String getPublisher() {
+        return publisher;
+    }
 
-    @Override
-    public boolean equals(final Object obj)
-    {
-        if ( obj == null || obj == this || !(obj instanceof Book) )
-            return false;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
-        Book otherBook = (Book) obj;
+    public String getIsbn() {
+        return isbn;
+    }
 
-        if (!otherBook.authors.equals(this.authors))       return false;
-        if (!otherBook.format.equals(this.format))     return false;
-        if (!otherBook.genre.equals(this.genre)) return false;
-        if (!otherBook.name.equals(this.name))   return false;
-        if (!otherBook.publisher.equals(this.publisher)) return false;
-        if (otherBook.isbn!=this.isbn) return false;
-        if (otherBook.year!=this.year) return false;
-
-        return true;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 }

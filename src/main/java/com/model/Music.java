@@ -1,18 +1,40 @@
 package com.model;
 
-import java.util.Objects;
+/**
+ * Model class of the music objects we can find on the website.
+ */
 
 public class Music {
-    String genre;
-    String format;
-    int year;
-    String artist;
+    private int id;
+    private String name;
+    private String genre;
+    private String format;
+    private int year;
+    private String artist;
 
-    public Music(String genre, String format, int year, String artist) {
+    public Music(int id, String name, String genre, String format, int year, String artist) {
+        this.id = id;
+        this.name = name;
         this.genre = genre;
         this.format = format;
         this.year = year;
         this.artist = artist;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGenre() {
@@ -45,21 +67,5 @@ public class Music {
 
     public void setArtist(String artist) {
         this.artist = artist;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Music music = (Music) o;
-        return year == music.year &&
-                Objects.equals(genre, music.genre) &&
-                Objects.equals(format, music.format) &&
-                Objects.equals(artist, music.artist);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(genre, format, year, artist);
     }
 }
