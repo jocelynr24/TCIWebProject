@@ -45,4 +45,14 @@ public class CrawlerTest {
         // Act (we give a wrong URL, it should throw an exception)
         crawler.getPageLinks("Invalid URL", "");
     }
+	
+	/**
+     * The webCrawlerShouldThrowExceptionForWrongUrl() method should throw an exception if we give a wrong URL format.
+     * We are testing here if we get this exception.
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void webCrawlerShouldThrowExceptionForWrongUrl() {
+        // Act (Giving a wrong URL to the basicWebCrawler, it should throw an exception)
+        crawler.webCrawler("Worng URL");
+    }
 }

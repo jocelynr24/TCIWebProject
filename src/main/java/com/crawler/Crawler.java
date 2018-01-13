@@ -36,6 +36,31 @@ public class Crawler {
         scraper = new Scraper();
         jsonObject = new JSONObject();
     }
+	
+	/**
+     * This method is getting the link that we give to retrieve the domain and then call the getPageLinks() method in order to start the crawling.
+     * @param URL The URL that will be used to detect the domain of the website that has to be crawled
+     */
+    public void webCrawler(String URL){
+        // Regex to detect if a URL is in a good format
+        String regex = "(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?";
+
+        // If the URL is in a good format
+        if (URL.matches(regex)) {
+            // We detect the domain of the URL by getting the index of the 3rd slash of the URL
+            int domainIndex = URL.indexOf("/", URL.indexOf("/", URL.indexOf("/") + 1) + 1);
+            // Then we store the part of the URL which is called the domain into a string
+            // The string should contain, in our example, "https://i398507.hera.fhict.nl"
+            String domain = URL.substring(0, domainIndex);
+            // Call the getPageLinks using the URL parameter that we already gave to the webCrawler method
+            // and the domain of the website so it won't search through other website
+            getPageLinks(URL, domain);
+        } else {
+            // Else, if the URL is not in a good format, we throw an exception
+            throw new IllegalArgumentException("illegal format of Url [" + URL + "]");
+        }
+
+    }
 
     /**
      * This method permits to get all the URLs of a web page if this web page has a valid URL and belongs to the same domain.
