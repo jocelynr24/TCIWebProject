@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 /***
  * Spring Controller
+ *
+ * @author Julien Conte
  */
 @RestController
 public class CrawlerRestSpringController {
@@ -51,7 +53,9 @@ public class CrawlerRestSpringController {
      */
     @RequestMapping(value="/item_by_category/{URL}", method = RequestMethod.GET, produces = "application/json")
     public String itemByCategory(@PathVariable String URL){
-        return crawler.getOnePerItem(URL.toLowerCase());
+
+        return crawler.getAllItems(URL.toLowerCase());
+
     }
 
 }
