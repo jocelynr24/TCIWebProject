@@ -33,9 +33,8 @@ public class CrawlerRestSpringControllerTest {
     public void initMocks() {
 
         MockitoAnnotations.initMocks(this);
-        when(crawlerMock.generalCrawler("x")).thenReturn("Légende");
-        when(crawlerMock.information()).thenReturn("de");
-        when(crawlerMock.findFirstMovieBookMusic()).thenReturn("Korra");
+        when(crawlerMock.getSpecificItem("x", "y")).thenReturn("Légende");
+        when(crawlerMock.getOnePerItem("x")).thenReturn("Korra");
     }
 
     /**
