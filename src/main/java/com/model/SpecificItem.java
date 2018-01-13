@@ -1,7 +1,6 @@
 package com.model;
 
 public class SpecificItem {
-    //private int id;
     private long time;
     private Object result;
 

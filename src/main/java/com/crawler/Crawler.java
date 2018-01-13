@@ -1,5 +1,6 @@
 package com.crawler;
 
+import com.model.OnePerItem;
 import com.model.SpecificItem;
 import com.owlike.genson.Genson;
 import com.scraper.Scraper;
