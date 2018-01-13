@@ -42,7 +42,7 @@ public class CrawlerRestSpringControllerTest {
      */
     @Test
     public void testSpecificItem() {
-        //assertTrue(controller.searchSpecificItem("x").equals("Légende"));
+        assertTrue(controller.searchSpecificItem("x").equals("Légende"));
     }
 
     /**
@@ -62,7 +62,7 @@ public class CrawlerRestSpringControllerTest {
                 return "de";
             }
         });
-        //assertTrue(controller.information().equals("de"));
+        assertTrue(controller.information().equals("de"));
     }
 
 
@@ -72,6 +72,6 @@ public class CrawlerRestSpringControllerTest {
      */
     @Test
     public void testFindFirstMovieBookMusic() {
-        //assertTrue(controller.itemByCategory().equals("Korra"));
+        assertTrue(controller.itemByCategory().equals("Korra"));
     }
 }

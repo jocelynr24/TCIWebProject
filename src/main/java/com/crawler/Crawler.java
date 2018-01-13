@@ -107,27 +107,27 @@ public class Crawler {
 
             webCrawler(URL);
 
-            for(Integer index = 0; links.size() > index; index++){
-                json = scraper.scrap(links.get(index));
-                if(json != null){
+            for (String link : links) {
+                json = scraper.scrap(link);
+                if (json != null) {
                     jsonObject = new JSONObject(json);
-					if(jsonObject.has("Category")){
-						ID = Integer.valueOf(links.get(index).split("=")[1]);
-						if(jsonObject.getString("Category").equals("Books")){
-							allItems.addBook(crawlerSerializer.serializeToBook(jsonObject, ID));
-						} else if(jsonObject.getString("Category").equals("Movies")){
-							allItems.addMovie(crawlerSerializer.serializeToMovie(jsonObject, ID));
-						} else if(jsonObject.getString("Category").equals("Music")){
-							allItems.addMusic(crawlerSerializer.serializeToMusic(jsonObject, ID));
-						}
-					}
+                    if (jsonObject.has("Category")) {
+                        ID = Integer.valueOf(link.split("=")[1]);
+                        if (jsonObject.getString("Category").equals("Books")) {
+                            allItems.addBook(crawlerSerializer.serializeToBook(jsonObject, ID));
+                        } else if (jsonObject.getString("Category").equals("Movies")) {
+                            allItems.addMovie(crawlerSerializer.serializeToMovie(jsonObject, ID));
+                        } else if (jsonObject.getString("Category").equals("Music")) {
+                            allItems.addMusic(crawlerSerializer.serializeToMusic(jsonObject, ID));
+                        }
+                    }
                 }
             }
 
             endTime = System.nanoTime();
             duration = endTime - startTime;
             allItems.setTime(duration);
-            
+
             returned = genson.serialize(allItems);
         } else {
             throw new IllegalArgumentException("illegal format of Url [" + URL + "]");
