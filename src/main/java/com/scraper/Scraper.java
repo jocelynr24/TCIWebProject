@@ -41,7 +41,7 @@ public class Scraper {
 
         Elements table = doc.select("tr");
 
-        map.put("title",title);
+        map.put("Title", title);
 
         for(Element tables : table){
             Elements tdh = tables.getElementsByTag("th");
