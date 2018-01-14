@@ -73,7 +73,7 @@ public class CrawlerTest {
     }
 
     /**
-     * The getSpecificItemReturnsAString() method should always return a string result.
+     * The getSpecificItemReturnsAStringForOneUrl() method should always return a string result.
      * We are testing here if this statement is true for one URL.
      */
     @Test
@@ -85,7 +85,7 @@ public class CrawlerTest {
     }
 
     /**
-     * The getSpecificItemReturnsAString() method should always return a string result.
+     * The getSpecificItemReturnsAStringForMultipleUrl() method should always return a string result.
      * We are testing here if this statement for multiple URL.
      */
     @Test
