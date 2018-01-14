@@ -17,6 +17,7 @@ import com.owlike.genson.Genson;
  * Scraper is called by the Crawler. The Crawler give severals URLs to the Scraper, which
  * is responsible to get information from the page and return a JSON to the Crawler.
  * This class contains only one method scrap(String url)
+ *
  * @author J-B Leblanc
  */
 
