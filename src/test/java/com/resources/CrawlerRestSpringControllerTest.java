@@ -33,6 +33,7 @@ public class CrawlerRestSpringControllerTest {
 
         MockitoAnnotations.initMocks(this);
         when(crawlerMock.getSpecificItem(controller.url, "y")).thenReturn("La légende de Korra");
+        when(crawlerMock.generalCrawler(controller.url)).thenReturn("La légende de Korra");
     }
 
     /**
@@ -44,25 +45,17 @@ public class CrawlerRestSpringControllerTest {
         assertTrue(controller.searchSpecificItem("y").equals("La légende de Korra"));
     }
 
-//    /**
-//     * Test of searchSpecificItem
-//     * This is a stub method
-//     * We replace the used functions and put the attended result
-//     * We need to test a string return
-//     */
-//    @Test
-//    //Stub
-//    public void testInformation()  {
-//
-//        controller = new CrawlerRestSpringController();
-//
-//        controller.setCrawler(new Crawler() {
-//            public String information() {
-//                return "de";
-//            }
-//        });
-//        assertTrue(controller.information().equals("de"));
-//    }
+    /**
+     * Test of searchSpecificItem
+     * This is a stub method
+     * We replace the used functions and put the attended result
+     * We need to test a string return
+     */
+    @Test
+    public void testInformation()  {
+
+        assertTrue(controller.information().equals("La légende de Korra"));
+    }
 
 
     /**
