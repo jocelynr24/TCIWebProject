@@ -19,6 +19,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
  * Indeed, as two objects will be different, we only need to test the contents of the objects.
  *
  * @author Jocelyn Routin
+ * @see com.serializer.CrawlerSerializer
  */
 
 public class CrawlerSerializerTest {
@@ -36,6 +37,9 @@ public class CrawlerSerializerTest {
     /**
      * The serializeToMovieShouldReturnAMovieObject() method should return a Movie object.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToMovie(JSONObject, int)
+     * @see com.model.Movie
      */
     @Test
     public void serializeToMovieShouldReturnAMovieObject(){
@@ -51,6 +55,9 @@ public class CrawlerSerializerTest {
     /**
      * The serializeToMovieShouldReturnInformationAboutOfficeSpace() method should return information about Office Space movie.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToMovie(JSONObject, int)
+     * @see com.model.Movie
      */
     @Test
     public void serializeToMovieShouldReturnInformationAboutOfficeSpace(){
@@ -67,6 +74,9 @@ public class CrawlerSerializerTest {
     /**
      * The serializeToMovieShouldThrowAnExceptionWhenJsonIsIncorrect() method should return a JSONException when the JSON is not correct.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToMovie(JSONObject, int)
+     * @see com.model.Movie
      */
     @Test(expected = JSONException.class)
     public void serializeToMovieShouldThrowAnExceptionWhenJsonIsIncorrect(){
@@ -74,12 +84,31 @@ public class CrawlerSerializerTest {
         String jsonToSerialize = "Incorrect JSON";
         JSONObject jsonObject = new JSONObject(jsonToSerialize);
         // Act (we call the serialize method)
-        Movie returnedMovie = crawlerSerializer.serializeToMovie(jsonObject, 0);
+        crawlerSerializer.serializeToMovie(jsonObject, 0);
+    }
+
+    /**
+     * The serializeToMovieShouldThrowAnExceptionWhenIdIsNegative() method should return a IllegalArgumentException when the ID is negative.
+     * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToMovie(JSONObject, int)
+     * @see com.model.Movie
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void serializeToMovieShouldThrowAnExceptionWhenIdIsNegative(){
+        // Arrange (we create a valid JSON object)
+        String jsonToSerialize = "{\"Category\":\"Movies\",\"Format\":\"Blu-ray\",\"Year\":\"1999\",\"Writers\":\"William Goldman\",\"Stars\":\"Ron Livingston, Jennifer Aniston, David Herman, Ajay Naidu, Diedrich Bader, Stephen Root\",\"Director\":\"Mike Judge\",\"Title\":\"Office Space\",\"Genre\":\"Comedy\"}";
+        JSONObject jsonObject = new JSONObject(jsonToSerialize);
+        // Act (we call the serialize method)
+        crawlerSerializer.serializeToMovie(jsonObject, -1);
     }
 
     /**
      * The serializeToMusicShouldReturnAMusicObject() method should return a Music object.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToMusic(JSONObject, int)
+     * @see com.model.Music
      */
     @Test
     public void serializeToMusicShouldReturnAMusicObject(){
@@ -93,8 +122,11 @@ public class CrawlerSerializerTest {
     }
 
     /**
-     * The serializeToMovieShouldReturnInformationAboutOfficeSpace() method should return information about Beethoven music.
+     * The serializeToMusicShouldReturnInformationAboutBeethoven() method should return information about Beethoven music.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToMusic(JSONObject, int)
+     * @see com.model.Music
      */
     @Test
     public void serializeToMusicShouldReturnInformationAboutBeethoven(){
@@ -111,6 +143,9 @@ public class CrawlerSerializerTest {
     /**
      * The serializeToMusicShouldThrowAnExceptionWhenJsonIsIncorrect() method should return a JSONException when the JSON is not correct.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToMusic(JSONObject, int)
+     * @see com.model.Music
      */
     @Test(expected = JSONException.class)
     public void serializeToMusicShouldThrowAnExceptionWhenJsonIsIncorrect(){
@@ -118,12 +153,31 @@ public class CrawlerSerializerTest {
         String jsonToSerialize = "Incorrect JSON";
         JSONObject jsonObject = new JSONObject(jsonToSerialize);
         // Act (we call the serialize method)
-        Music returnedMusic = crawlerSerializer.serializeToMusic(jsonObject, 0);
+        crawlerSerializer.serializeToMusic(jsonObject, 0);
+    }
+
+    /**
+     * The serializeToMusicShouldThrowAnExceptionWhenIdIsNegative() method should return a IllegalArgumentException when the ID is negative.
+     * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToMusic(JSONObject, int)
+     * @see com.model.Music
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void serializeToMusicShouldThrowAnExceptionWhenIdIsNegative(){
+        // Arrange (we create a valid JSON object)
+        String jsonToSerialize = "{\"Artist\":\"Ludwig van Beethoven\",\"Category\":\"Music\",\"Format\":\"CD\",\"Year\":\"2012\",\"Title\":\"Beethoven: Complete Symphonies\",\"Genre\":\"Clasical\"}";
+        JSONObject jsonObject = new JSONObject(jsonToSerialize);
+        // Act (we call the serialize method)
+        crawlerSerializer.serializeToMusic(jsonObject, -1);
     }
 
     /**
      * The serializeToBookShouldReturnABookObject() method should return a Book object.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToBook(JSONObject, int)
+     * @see com.model.Book
      */
     @Test
     public void serializeToBookShouldReturnABookObject(){
@@ -139,6 +193,9 @@ public class CrawlerSerializerTest {
     /**
      * The serializeToMovieShouldReturnInformationAboutOfficeSpace() method should return information about Agile Software book.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToBook(JSONObject, int)
+     * @see com.model.Book
      */
     @Test
     public void serializeToBookShouldReturnInformationAboutAgileSoftware(){
@@ -155,6 +212,9 @@ public class CrawlerSerializerTest {
     /**
      * The serializeToBookShouldThrowAnExceptionWhenJsonIsIncorrect() method should return a JSONException when the JSON is not correct.
      * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToBook(JSONObject, int)
+     * @see com.model.Book
      */
     @Test(expected = JSONException.class)
     public void serializeToBookShouldThrowAnExceptionWhenJsonIsIncorrect(){
@@ -162,6 +222,22 @@ public class CrawlerSerializerTest {
         String jsonToSerialize = "Incorrect JSON";
         JSONObject jsonObject = new JSONObject(jsonToSerialize);
         // Act (we call the serialize method)
-        Book returnedBook = crawlerSerializer.serializeToBook(jsonObject, 0);
+        crawlerSerializer.serializeToBook(jsonObject, 0);
+    }
+
+    /**
+     * The serializeToBookShouldThrowAnExceptionWhenIdIsNegative() method should return a IllegalArgumentException when the ID is negative.
+     * We are testing here if this statement is true.
+     *
+     * @see com.serializer.CrawlerSerializer#serializeToBook(JSONObject, int)
+     * @see com.model.Book
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void serializeToBookShouldThrowAnExceptionWhenIdIsNegative(){
+        // Arrange (we create a valid JSON object)
+        String jsonToSerialize = "{\"Category\":\"Books\",\"Format\":\"Ebook\",\"Year\":\"2008\",\"ISBN\":\"978-0132350884\",\"Authors\":\"Robert C. Martin\",\"Title\":\"Clean Code: A Handbook of Agile Software Craftsmanship\",\"Genre\":\"Tech\",\"Publisher\":\"Prentice Hall\"}";
+        JSONObject jsonObject = new JSONObject(jsonToSerialize);
+        // Act (we call the serialize method)
+        crawlerSerializer.serializeToBook(jsonObject, -1);
     }
 }

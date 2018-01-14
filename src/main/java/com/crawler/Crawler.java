@@ -43,7 +43,10 @@ public class Crawler {
 
 	/**
      * This method is getting the link that we give to retrieve the domain and then call the getPageLinks() method in order to start the crawling.
-     * @param URL The URL that will be used to detect the domain of the website that has to be crawled
+     *
+     * @param URL The URL that will be used to detect the domain of the website that has to be crawled.
+     *
+     * @see com.crawler.Crawler#getPageLinks(String, String)
      */
     public void webCrawler(String URL){
         String regex = "(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?";
@@ -59,8 +62,10 @@ public class Crawler {
 
     /**
      * This method permits to get all the URLs of a web page if this web page has a valid URL and belongs to the same domain.
+     *
      * @param URL The URL we want to get other links (e.g.: "http://website.com/page?id=123").
      * @param domain The domain of the web page (e.g.: "http://website.com").
+     * @return An acknowledgement boolean to specify that the work finished correctly.
      */
     public boolean getPageLinks(String URL, String domain) {
         String regex = "(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?";
@@ -89,15 +94,18 @@ public class Crawler {
     }
 
     /**
-     * This function makes use of the webCrawler to get the first Movie, Book and Music it meets on the website and store the information inside a JSON formatted String
+     * This method makes use of the webCrawler() method to get all the movies, books and music it meets on the website and store the information inside a JSON formatted String.
+     *
      * @param URL The URL we want to get other links (e.g.: "http://website.com/page?id=123").
      * @return A JSON formatted String that contains the information of the first Movie, Book and music met on the website, starting from the given URL.
+     *
+     * @see com.crawler.Crawler#webCrawler(String)
      */
     public String getAllItems(String URL) {
         long startTime, endTime, duration;
         String json;
         AllItems allItems = new AllItems();
-        String returned = "";
+        String allItemsJSON = "";
         Integer ID;
         String regex = "(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?";
 
@@ -128,18 +136,21 @@ public class Crawler {
             duration = endTime - startTime;
             allItems.setTime(duration);
 
-            returned = genson.serialize(allItems);
+            allItemsJSON = genson.serialize(allItems);
         } else {
-            throw new IllegalArgumentException("illegal format of Url [" + URL + "]");
+            throw new IllegalArgumentException("The URL is not correct.");
         }
-        return returned;
+        return allItemsJSON;
     }
 
     /**
-     * This method permits to find a specific item on the whole website by giving the name of what we want to search.
+     * This method permits to find a specific item on the whole website by giving the name of what we want to search by calling the webCrawler() method.
+     *
      * @param URL The URL we want to get other links (e.g.: "http://website.com/page?id=123").
      * @param name The domain of the web page (e.g.: "http://website.com").
      * @return A string in a JSON format containing all the information of the element we searched, else an empty string if nothing was found.
+     *
+     * @see com.crawler.Crawler#webCrawler(String)
      */
     public String getSpecificItem(String URL, String name) {
         Integer index = 0;
@@ -191,14 +202,9 @@ public class Crawler {
                 specificItemJSON = "";
             }
         } else {
-            throw new IllegalArgumentException("The URL is not correct");
+            throw new IllegalArgumentException("The URL is not correct.");
         }
 
         return specificItemJSON;
-    }
-
-    public String generalCrawler(String URL){
-
-        return "";
     }
 }

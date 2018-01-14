@@ -1,5 +1,12 @@
 package com.model;
 
+/**
+ * Model class of the SpecificItem provided in the crawler.
+ * Used by the method getSpecificItem() in the crawler.
+ *
+ * @see com.crawler.Crawler#getSpecificItem(String, String)
+ */
+
 public class SpecificItem {
     private long time;
     private Object result;

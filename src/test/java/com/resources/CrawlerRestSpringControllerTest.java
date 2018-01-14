@@ -10,6 +10,11 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+/**
+ * Spring Controller tests
+ *
+ * @author Julien Conte
+ */
 
 public class CrawlerRestSpringControllerTest {
     /**
@@ -32,8 +37,7 @@ public class CrawlerRestSpringControllerTest {
     public void initMocks() {
 
         MockitoAnnotations.initMocks(this);
-        when(crawlerMock.getSpecificItem(controller.url, "y")).thenReturn("La légende de Korra");
-        when(crawlerMock.generalCrawler(controller.url)).thenReturn("La légende de Korra");
+        when(crawlerMock.getSpecificItem(controller.url, "Name")).thenReturn("La légende de Korra");
     }
 
     /**
@@ -42,37 +46,22 @@ public class CrawlerRestSpringControllerTest {
      */
     @Test
     public void testSpecificItem() {
-        assertTrue(controller.searchSpecificItem("y").equals("La légende de Korra"));
+        assertTrue(controller.searchSpecificItem("Name").equals("La légende de Korra"));
     }
-
-    /**
-     * Test of searchSpecificItem
-     * This is a stub method
-     * We replace the used functions and put the attended result
-     * We need to test a string return
-     */
-    @Test
-    public void testInformation()  {
-
-        assertTrue(controller.information().equals("La légende de Korra"));
-    }
-
 
     /**
      * Test of findFirstMovieBookMusic
      * We need to test a string return
      */
     @Test
-    public void testFindFirstMovieBookMusic() {
-
+    public void testAllItems() {
         controller = new CrawlerRestSpringController();
-
         controller.setCrawler(new Crawler() {
             public String getAllItems(String URL) {
                 return "Korra";
             }
         });
-        String d=controller.itemByCategory();
-        assertTrue(controller.itemByCategory().equals("Korra"));
+        String d = controller.searchAllItems();
+        assertTrue(controller.searchAllItems().equals("Korra"));
     }
 }

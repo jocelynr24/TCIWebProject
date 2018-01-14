@@ -23,17 +23,18 @@ import com.owlike.genson.Genson;
 
 public class Scraper {
 
+    /**
+     * Constructor of the class.
+     */
     public Scraper(){};
-
 
     /**
      * The method scrap() is inspecting the html page, searching for td and th tags, and stocks
      * the result in an HashMap. Then it serializes this HashMap to returns the JSON containing
      * all the information about Movie, Books or Musics that the page contains.
-     * @param url : This is the string which is the URL page we want to scrap
-     * @return a string which contains the json
+     * @param url This is the string which is the URL page we want to scrap
+     * @return A string which contains the json
      */
-
     public String scrap(String url){
 
         HashMap<String,String> map = new HashMap<>();

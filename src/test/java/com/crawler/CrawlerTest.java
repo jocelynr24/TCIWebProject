@@ -19,6 +19,8 @@ import static org.hamcrest.CoreMatchers.instanceOf;
  *
  * @author Jocelyn Routin
  * @author Adrien Cosson
+ *
+ * @see com.crawler.Crawler
  */
 
 @RunWith(JUnitParamsRunner.class)
@@ -43,6 +45,8 @@ public class CrawlerTest {
     /**
      * In the case the getPageLinks() method succeeds, it returns a "true" boolean.
      * We are testing here if we get this boolean correctly.
+     *
+     * @see com.crawler.Crawler#getPageLinks(String, String)
      */
     @Test
     public void getPageLinksSucceeds(){
@@ -55,6 +59,8 @@ public class CrawlerTest {
     /**
      * In the case we give a wrong URL to the getPageLinks() method, it returns an IllegalArgumentException exception.
      * We are testing here if we get this exception.
+     *
+     * @see com.crawler.Crawler#getPageLinks(String, String)
      */
     @Test(expected = IllegalArgumentException.class)
     public void getPageLinksHasAnInvalidURL(){
@@ -65,6 +71,8 @@ public class CrawlerTest {
 	/**
      * The webCrawlerShouldThrowExceptionForWrongUrl() method should throw an exception if we give a wrong URL format.
      * We are testing here if we get this exception.
+     *
+     * @see com.crawler.Crawler#webCrawler(String)
      */
     @Test (expected = IllegalArgumentException.class)
     public void webCrawlerShouldThrowExceptionForWrongUrl() {
@@ -75,6 +83,8 @@ public class CrawlerTest {
     /**
      * The getSpecificItemReturnsAStringForOneUrl() method should always return a string result.
      * We are testing here if this statement is true for one URL.
+     *
+     * @see com.crawler.Crawler#getSpecificItem(String, String)
      */
     @Test
     public void getSpecificItemReturnsAStringForOneUrl(){
@@ -87,6 +97,8 @@ public class CrawlerTest {
     /**
      * The getSpecificItemReturnsAStringForMultipleUrl() method should always return a string result.
      * We are testing here if this statement for multiple URL.
+     *
+     * @see com.crawler.Crawler#getSpecificItem(String, String)
      */
     @Test
     @Parameters(method = "someURL")
@@ -104,6 +116,8 @@ public class CrawlerTest {
     /**
      * The getSpecificItemReturnsAString() method should return a JSON string when we give a URL and a name.
      * We are testing here if the JSON returned by the crawler is the same JSON file that we expect (for example, with "Office Space").
+     *
+     * @see com.crawler.Crawler#getSpecificItem(String, String)
      */
     @Test
     public void getSpecificItemReturnsValueForOfficeSpace(){
@@ -121,6 +135,8 @@ public class CrawlerTest {
     /**
      * The getSpecificItemReturnsAString() method should throw an exception if we give a wrong URL format.
      * We are testing here if we get this exception.
+     *
+     * @see com.crawler.Crawler#getSpecificItem(String, String)
      */
     @Test(expected = IllegalArgumentException.class)
     public void getSpecificItemHasAnInvalidURL(){
@@ -130,7 +146,9 @@ public class CrawlerTest {
 
     /**
      * The getSpecificItemReturnsAString() method should return an empty string if we give a name which is not on the website.
-     * We are testing here if we get an empty result
+     * We are testing here if we get an empty result.
+     *
+     * @see com.crawler.Crawler#getSpecificItem(String, String)
      */
     @Test
     public void getSpecificItemFoundNothing(){
@@ -141,8 +159,10 @@ public class CrawlerTest {
     }
 	
 	/**
-     * The getOnePerItemShouldThrowExceptionForWrongUrl() method should throw an exception if we give a wrong URL format.
+     * The getAllItemsShouldThrowExceptionForWrongUrl() method should throw an exception if we give a wrong URL format.
      * We are testing here if we get this exception.
+     *
+     * @see com.crawler.Crawler#getAllItems(String)
      */
     @Test (expected = IllegalArgumentException.class)
     public void getAllItemsShouldThrowExceptionForWrongUrl() {
@@ -151,8 +171,10 @@ public class CrawlerTest {
     }
 
     /**
-     * The getOnePerItemShouldReturnAString() method should always return a string result, whether it is empty or filled with information.
+     * The getAllItemsShouldReturnAString() method should always return a string result, whether it is empty or filled with information.
      * We are testing here if this statement is true.
+     *
+     * @see com.crawler.Crawler#getAllItems(String)
      */
     @Test
     public void getAllItemsShouldReturnAString(){
@@ -163,7 +185,9 @@ public class CrawlerTest {
     }
 
     /**
-     * The getOnePerItemShouldReturnValueForSpecificUrl() method tests the fact that getAllItems() method should return the same result for the same parameter.
+     * The getAllItemsShouldReturnValueForSpecificUrl() method tests the fact that getAllItems() method should return the same result for the same parameter.
+     *
+     * @see com.crawler.Crawler#getAllItems(String)
      */
     @Test
     public void getAllItemsShouldReturnValueForSpecificUrl() {

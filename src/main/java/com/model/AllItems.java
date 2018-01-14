@@ -3,6 +3,13 @@ package com.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model class of the AllItems provided in the crawler.
+ * Used by the method getAllItems() in the crawler.
+ *
+ * @see com.crawler.Crawler#getAllItems(String)
+ */
+
 public class AllItems {
     private long time;
     private List<Object> movies = new ArrayList<>();
