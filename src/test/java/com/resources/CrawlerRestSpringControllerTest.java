@@ -32,8 +32,7 @@ public class CrawlerRestSpringControllerTest {
     public void initMocks() {
 
         MockitoAnnotations.initMocks(this);
-        when(crawlerMock.getSpecificItem("x", "y")).thenReturn("Légende");
-        when(crawlerMock.getAllItems("x")).thenReturn("Korra");
+        when(crawlerMock.getSpecificItem(controller.url, "y")).thenReturn("La légende de Korra");
     }
 
     /**
@@ -42,28 +41,28 @@ public class CrawlerRestSpringControllerTest {
      */
     @Test
     public void testSpecificItem() {
-        assertTrue(controller.searchSpecificItem("x").equals("Légende"));
+        assertTrue(controller.searchSpecificItem("y").equals("La légende de Korra"));
     }
 
-    /**
-     * Test of searchSpecificItem
-     * This is a stub method
-     * We replace the used functions and put the attended result
-     * We need to test a string return
-     */
-    @Test
-    //Stub
-    public void testInformation()  {
-
-        controller = new CrawlerRestSpringController();
-
-        controller.setCrawler(new Crawler() {
-            public String information() {
-                return "de";
-            }
-        });
-        assertTrue(controller.information().equals("de"));
-    }
+//    /**
+//     * Test of searchSpecificItem
+//     * This is a stub method
+//     * We replace the used functions and put the attended result
+//     * We need to test a string return
+//     */
+//    @Test
+//    //Stub
+//    public void testInformation()  {
+//
+//        controller = new CrawlerRestSpringController();
+//
+//        controller.setCrawler(new Crawler() {
+//            public String information() {
+//                return "de";
+//            }
+//        });
+//        assertTrue(controller.information().equals("de"));
+//    }
 
 
     /**
@@ -72,6 +71,15 @@ public class CrawlerRestSpringControllerTest {
      */
     @Test
     public void testFindFirstMovieBookMusic() {
+
+        controller = new CrawlerRestSpringController();
+
+        controller.setCrawler(new Crawler() {
+            public String getAllItems(String URL) {
+                return "Korra";
+            }
+        });
+        String d=controller.itemByCategory();
         assertTrue(controller.itemByCategory().equals("Korra"));
     }
 }
