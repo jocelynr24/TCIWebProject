@@ -1,8 +1,17 @@
 package com.crawler;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.instanceOf;
 
 /**
@@ -12,8 +21,15 @@ import static org.hamcrest.CoreMatchers.instanceOf;
  * @author Adrien Cosson
  */
 
+@RunWith(JUnitParamsRunner.class)
 public class CrawlerTest {
-    Crawler crawler;
+    private Crawler crawler;
+
+    private static Object[] someURL(){
+        return new Object[]{
+                new Object[]{new ArrayList<String>(Arrays.asList("https://i398507.hera.fhict.nl/tci/", "https://i398507.hera.fhict.nl/tci/details.php?id=202", "https://i398507.hera.fhict.nl/tci/catalog.php"))}
+        };
+    }
 
     /**
      * Setup of the test class.
@@ -53,19 +69,36 @@ public class CrawlerTest {
     @Test (expected = IllegalArgumentException.class)
     public void webCrawlerShouldThrowExceptionForWrongUrl() {
         // Act (Giving a wrong URL to the basicWebCrawler, it should throw an exception)
-        crawler.webCrawler("Worng URL");
+        crawler.webCrawler("Wrong URL");
     }
 
     /**
      * The getSpecificItemReturnsAString() method should always return a string result.
-     * We are testing here if this statement is true.
+     * We are testing here if this statement is true for one URL.
      */
     @Test
-    public void getSpecificItemReturnsAString(){
+    public void getSpecificItemReturnsAStringForOneUrl(){
         // Act (we give a URL and a name to find something)
         String specificItem = crawler.getSpecificItem("https://i398507.hera.fhict.nl/tci/", "Office Space");
         // Assert (that the previously returned item is a string)
         Assert.assertThat(specificItem, instanceOf(String.class));
+    }
+
+    /**
+     * The getSpecificItemReturnsAString() method should always return a string result.
+     * We are testing here if this statement for multiple URL.
+     */
+    @Test
+    @Parameters(method = "someURL")
+    public void getSpecificItemReturnsAStringForMultipleUrl(List<String> URL){
+        // Act (we give a URL and a name to find something)
+        String specificItem1 = crawler.getSpecificItem(URL.get(0), "Office Space");
+        String specificItem2 = crawler.getSpecificItem(URL.get(1), "Office Space");
+        String specificItem3 = crawler.getSpecificItem(URL.get(2), "Office Space");
+        // Assert (that the previously returned item is a string)
+        Assert.assertThat(specificItem1, instanceOf(String.class));
+        Assert.assertThat(specificItem2, instanceOf(String.class));
+        Assert.assertThat(specificItem3, instanceOf(String.class));
     }
 
     /**
